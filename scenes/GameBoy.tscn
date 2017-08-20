@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=14 format=1]
 
-[ext_resource path="res://shaders/gameboy_grid/gameboy_grid.tres" type="CanvasItemMaterial" id=1]
-[ext_resource path="res://shaders/gameboy_grid/grid_pattern.png" type="Texture" id=2]
-[ext_resource path="res://shaders/glass.png" type="Texture" id=3]
-[ext_resource path="res://assets/GB_OUT.tex" type="Texture" id=4]
-[ext_resource path="res://assets/light ball.tex" type="Texture" id=5]
-[ext_resource path="res://scripts/GB_buttons.gd" type="Script" id=6]
-[ext_resource path="res://scripts/GB_battery.gd" type="Script" id=7]
+[ext_resource path="res://assets/mhp.png" type="Texture" id=1]
+[ext_resource path="res://shaders/4_colors/4_colors.tres" type="CanvasItemMaterial" id=2]
+[ext_resource path="res://shaders/4_colors/black.png" type="Texture" id=3]
+[ext_resource path="res://shaders/gameboy_grid/gameboy_grid.tres" type="CanvasItemMaterial" id=4]
+[ext_resource path="res://shaders/gameboy_grid/grid_pattern.png" type="Texture" id=5]
+[ext_resource path="res://shaders/glass.png" type="Texture" id=6]
+[ext_resource path="res://assets/GB_OUT.png" type="Texture" id=7]
+[ext_resource path="res://assets/light ball.png" type="Texture" id=8]
+[ext_resource path="res://scripts/GB_buttons.gd" type="Script" id=9]
+[ext_resource path="res://scripts/GB_battery.gd" type="Script" id=10]
 
 [sub_resource type="Animation" id=1]
 
@@ -18,7 +21,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("led:energy")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 1 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 0.0, 20.0 ] }
+tracks/0/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0 ]
+}
 
 [sub_resource type="Animation" id=2]
 
@@ -30,7 +38,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("led:energy")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 20.0, 0.0 ] }
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 20.0, 0.0 ]
+}
 
 [sub_resource type="Animation" id=3]
 
@@ -41,7 +54,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("led:energy")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 1 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 0.0, 20.0 ] }
+tracks/0/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0 ]
+}
 
 [node name="GameBoy" type="Control"]
 
@@ -53,11 +71,24 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 40.0
-__meta__ = { "_edit_lock_":true }
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Back" type="ColorFrame" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 32.0
+margin/top = 32.0
+margin/right = 224.0
+margin/bottom = 192.0
+color = Color( 1, 1, 1, 1 )
 
 [node name="game-control" type="Control" parent="."]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -70,9 +101,9 @@ margin/bottom = 188.0
 [node name="view" type="Viewport" parent="game-control"]
 
 rect = Rect2( 0, 0, 160, 144 )
-own_world = false
+own_world = true
 world = null
-transparent_bg = false
+transparent_bg = true
 render_target/enabled = true
 render_target/v_flip = false
 render_target/clear_on_new_frame = true
@@ -84,21 +115,28 @@ audio_listener/enable_3d = false
 physics/object_picking = false
 gui/disable_input = false
 
+[node name="Test" type="Sprite" parent="game-control/view"]
+
+transform/scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+centered = false
+hframes = 2
+
 [node name="game" type="ViewportSprite" parent="."]
 
 transform/pos = Vector2( 49, 44 )
 viewport = NodePath("../game-control/view")
 centered = false
 
-[node name="Grid" type="BackBufferCopy" parent="."]
+[node name="Palette" type="BackBufferCopy" parent="."]
 
 transform/pos = Vector2( 132.266, 110.803 )
 copy_mode = 2
 rect = Rect2( -100, -100, 200, 200 )
 
-[node name="grid-texture" type="TextureFrame" parent="Grid"]
+[node name="palette-texture" type="TextureFrame" parent="Palette"]
 
-material/material = ExtResource( 1 )
+material/material = ExtResource( 2 )
 rect/scale = Vector2( 0.3, 0.3 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -108,7 +146,28 @@ margin/left = -93.0
 margin/top = -76.0
 margin/right = 497.0
 margin/bottom = 458.0
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="Grid" type="BackBufferCopy" parent="."]
+
+transform/pos = Vector2( 132.266, 110.803 )
+copy_mode = 2
+rect = Rect2( -100, -100, 200, 200 )
+
+[node name="grid-texture" type="TextureFrame" parent="Grid"]
+
+material/material = ExtResource( 4 )
+rect/scale = Vector2( 0.3, 0.3 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -93.0
+margin/top = -76.0
+margin/right = 497.0
+margin/bottom = 458.0
+texture = ExtResource( 5 )
 stretch_mode = 2
 
 [node name="Shadows" type="Control" parent="."]
@@ -171,13 +230,15 @@ visibility/opacity = 0.14
 visibility/light_mask = 2
 transform/pos = Vector2( 128, 112 )
 transform/scale = Vector2( 0.372093, 0.295385 )
-texture = ExtResource( 3 )
+texture = ExtResource( 6 )
 
 [node name="case" type="Sprite" parent="."]
 
-texture = ExtResource( 4 )
+texture = ExtResource( 7 )
 centered = false
-__meta__ = { "_edit_lock_":true }
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TheSun" type="Light2D" parent="."]
 
@@ -185,7 +246,7 @@ transform/pos = Vector2( 192, 72 )
 transform/scale = Vector2( 2.28571, 2.42857 )
 enabled = true
 editor_only = false
-texture = ExtResource( 5 )
+texture = ExtResource( 8 )
 offset = Vector2( 0, 0 )
 scale = 1.0
 color = Color( 1, 1, 1, 1 )
@@ -207,8 +268,10 @@ shadow/item_mask = 1
 
 editor/display_folded = true
 visibility/opacity = 0.490909
-script/script = ExtResource( 6 )
-__meta__ = { "_edit_lock_":true }
+script/script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="A" type="Button" parent="buttons"]
 
@@ -333,7 +396,7 @@ flat = false
 [node name="battery" type="Node2D" parent="."]
 
 editor/display_folded = true
-script/script = ExtResource( 7 )
+script/script = ExtResource( 10 )
 battery = "C:/Users/tumeo/Google Drive/GBJAM2016/game-boy/scripts/battery.py"
 
 [node name="led" type="Light2D" parent="battery"]
@@ -341,7 +404,7 @@ battery = "C:/Users/tumeo/Google Drive/GBJAM2016/game-boy/scripts/battery.py"
 transform/pos = Vector2( 27, 72 )
 enabled = true
 editor_only = false
-texture = ExtResource( 5 )
+texture = ExtResource( 8 )
 offset = Vector2( 0, 0 )
 scale = 0.1
 color = Color( 1, 0, 0, 1 )
