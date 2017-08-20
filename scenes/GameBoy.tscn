@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://assets/mhp.png" type="Texture" id=1]
 [ext_resource path="res://shaders/4_colors/4_colors.tres" type="CanvasItemMaterial" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://assets/GB_OUT.png" type="Texture" id=7]
 [ext_resource path="res://assets/light ball.png" type="Texture" id=8]
 [ext_resource path="res://scripts/GB_buttons.gd" type="Script" id=9]
-[ext_resource path="res://scripts/GB_battery.gd" type="Script" id=10]
+[ext_resource path="res://scenes/ButtonBind.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scripts/GB_battery.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=1]
 
@@ -266,137 +267,81 @@ shadow/item_mask = 1
 
 [node name="buttons" type="Node2D" parent="."]
 
-editor/display_folded = true
 visibility/opacity = 0.490909
 script/script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
+debug = true
 
-[node name="A" type="Button" parent="buttons"]
+[node name="A" parent="buttons" instance=ExtResource( 10 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
 margin/left = 207.0
-margin/top = 271.0
+margin/top = 270.0
 margin/right = 240.0
-margin/bottom = 303.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin/bottom = 302.0
+bind_action = "ui_accept"
 
-[node name="B" type="Button" parent="buttons"]
+[node name="B" parent="buttons" instance=ExtResource( 10 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
 margin/left = 160.0
 margin/top = 285.0
 margin/right = 192.0
 margin/bottom = 318.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+bind_action = "ui_cancel"
 
-[node name="Start" type="Button" parent="buttons"]
+[node name="Start" parent="buttons" instance=ExtResource( 10 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
 margin/left = 133.0
 margin/top = 354.0
 margin/right = 162.0
 margin/bottom = 374.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+bind_action = "ui_accept"
 
-[node name="Select" type="Button" parent="buttons"]
+[node name="Select" parent="buttons" instance=ExtResource( 10 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
 margin/left = 94.0
 margin/top = 354.0
 margin/right = 124.0
 margin/bottom = 374.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+bind_action = "ui_select"
 
-[node name="Up" type="Button" parent="buttons"]
+[node name="Up" parent="buttons" instance=ExtResource( 10 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
 margin/left = 36.0
 margin/top = 260.0
 margin/right = 61.0
 margin/bottom = 284.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+bind_action = "ui_up"
 
-[node name="Down" type="Button" parent="buttons"]
+[node name="Down" parent="buttons" instance=ExtResource( 10 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
 margin/left = 36.0
 margin/top = 302.0
 margin/right = 61.0
 margin/bottom = 327.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+bind_action = "ui_down"
 
-[node name="Left" type="Button" parent="buttons"]
+[node name="Left" parent="buttons" instance=ExtResource( 10 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
 margin/left = 14.0
 margin/top = 281.0
 margin/right = 37.0
 margin/bottom = 305.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+bind_action = "ui_left"
 
-[node name="Right" type="Button" parent="buttons"]
+[node name="Right" parent="buttons" instance=ExtResource( 10 )]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
 margin/left = 60.0
 margin/top = 281.0
 margin/right = 82.0
 margin/bottom = 305.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+bind_action = "ui_right"
 
 [node name="battery" type="Node2D" parent="."]
 
 editor/display_folded = true
-script/script = ExtResource( 10 )
+script/script = ExtResource( 11 )
 battery = "C:/Users/tumeo/Google Drive/GBJAM2016/game-boy/scripts/battery.py"
 
 [node name="led" type="Light2D" parent="battery"]

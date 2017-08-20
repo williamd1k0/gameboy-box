@@ -1,24 +1,11 @@
 extends Node2D
 
-var action_prefix = "GB_"
-var buttons = [
-	"A",
-	"B",
-	"Start",
-	"Select",
-	"Up",
-	"Down",
-	"Left",
-	"Right"
-]
+export(bool) var debug = false
 
 func _ready():
-	set_fixed_process(true)
+	set_process(debug)
 
-func _fixed_process(delta):
-	var i = 0
-	for button in buttons:
-		if get_child(i).is_pressed():
-			Input.action_press(action_prefix+button)
-		else:
-			Input.action_release(action_prefix+button)
+func _process(delta):
+	for button in get_children():
+		if Input.is_action_pressed(button.bind_action):
+			prints(button.bind_action, Input.is_action_pressed(button.bind_action))
