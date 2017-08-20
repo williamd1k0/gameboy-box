@@ -78,6 +78,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 main_scene = ExtResource( 2 )
+palette_limit = true
+grid = true
+glass = true
+sun = true
 
 [node name="Back" type="ColorFrame" parent="."]
 
@@ -121,6 +125,7 @@ gui/disable_input = false
 
 [node name="game" type="ViewportSprite" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 49, 44 )
 viewport = NodePath("../game-control/view")
 centered = false
@@ -222,7 +227,6 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="Glass" type="Sprite" parent="."]
 
-visibility/visible = false
 visibility/opacity = 0.14
 visibility/light_mask = 2
 transform/pos = Vector2( 128, 112 )
